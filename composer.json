@@ -1,0 +1,45 @@
+{
+    "name": "timahfouz/svg-sanitizer",
+    "description": "A Laravel package for sanitizing SVG files and SVG code to prevent XSS attacks",
+    "type": "library",
+    "keywords": ["laravel", "svg", "sanitizer", "xss", "security", "validation"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tarek MAhfouz",
+            "email": "tarek.mahfouz2011@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "illuminate/support": "^10.0|^11.0|^12.0",
+        "illuminate/validation": "^10.0|^11.0|^12.0",
+        "enshrined/svg-sanitize": "^0.16|^0.17|^0.18|^0.19|^0.20"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^8.0|^9.0|^10.0",
+        "phpunit/phpunit": "^10.0|^11.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Timahfouz\\SvgSanitizer\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Timahfouz\\SvgSanitizer\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Timahfouz\\SvgSanitizer\\SvgSanitizerServiceProvider"
+            ],
+            "aliases": {
+                "SvgSanitizer": "Timahfouz\\SvgSanitizer\\Facades\\SvgSanitizer"
+            }
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
