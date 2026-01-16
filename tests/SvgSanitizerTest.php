@@ -1,11 +1,11 @@
 <?php
 
-namespace YourVendor\SvgSanitizer\Tests;
+namespace Timahfouz\SvgSanitizer\Tests;
 
 use Orchestra\Testbench\TestCase;
-use YourVendor\SvgSanitizer\SvgSanitizerServiceProvider;
-use YourVendor\SvgSanitizer\Services\SvgCodeSanitizer;
-use YourVendor\SvgSanitizer\Services\SvgFileSanitizer;
+use Timahfouz\SvgSanitizer\SvgSanitizerServiceProvider;
+use Timahfouz\SvgSanitizer\Services\SvgCodeSanitizer;
+use Timahfouz\SvgSanitizer\Services\SvgFileSanitizer;
 
 class SvgSanitizerTest extends TestCase
 {

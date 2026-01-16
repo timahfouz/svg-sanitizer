@@ -1,11 +1,11 @@
 <?php
 
-namespace YourVendor\SvgSanitizer\Services;
+namespace Timahfouz\SvgSanitizer\Services;
 
 use enshrined\svgSanitize\Sanitizer;
 use Illuminate\Http\UploadedFile;
-use YourVendor\SvgSanitizer\Data\AllowedTags;
-use YourVendor\SvgSanitizer\Data\AllowedAttributes;
+use Timahfouz\SvgSanitizer\Data\AllowedTags;
+use Timahfouz\SvgSanitizer\Data\AllowedAttributes;
 
 class SvgFileSanitizer
 {

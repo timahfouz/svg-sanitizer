@@ -1,11 +1,11 @@
 <?php
 
-namespace YourVendor\SvgSanitizer\Rules;
+namespace Timahfouz\SvgSanitizer\Rules;
 
 use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Http\UploadedFile;
-use YourVendor\SvgSanitizer\Services\SvgFileSanitizer;
+use Timahfouz\SvgSanitizer\Services\SvgFileSanitizer;
 
 /**
  * Validates that an uploaded SVG file is safe.

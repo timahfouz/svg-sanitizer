@@ -1,6 +1,6 @@
 <?php
 
-namespace YourVendor\SvgSanitizer\Services;
+namespace Timahfouz\SvgSanitizer\Services;
 
 class SvgCodeSanitizer
 {

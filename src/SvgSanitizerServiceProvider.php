@@ -1,13 +1,13 @@
 <?php
 
-namespace YourVendor\SvgSanitizer;
+namespace Timahfouz\SvgSanitizer;
 
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
-use YourVendor\SvgSanitizer\Rules\SvgFileSafe;
-use YourVendor\SvgSanitizer\Rules\SvgCodeSafe;
-use YourVendor\SvgSanitizer\Services\SvgFileSanitizer;
-use YourVendor\SvgSanitizer\Services\SvgCodeSanitizer;
+use Timahfouz\SvgSanitizer\Rules\SvgFileSafe;
+use Timahfouz\SvgSanitizer\Rules\SvgCodeSafe;
+use Timahfouz\SvgSanitizer\Services\SvgFileSanitizer;
+use Timahfouz\SvgSanitizer\Services\SvgCodeSanitizer;
 
 class SvgSanitizerServiceProvider extends ServiceProvider
 {

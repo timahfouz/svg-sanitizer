@@ -1,10 +1,10 @@
 <?php
 
-namespace YourVendor\SvgSanitizer;
+namespace Timahfouz\SvgSanitizer;
 
 use Illuminate\Http\UploadedFile;
-use YourVendor\SvgSanitizer\Services\SvgFileSanitizer;
-use YourVendor\SvgSanitizer\Services\SvgCodeSanitizer;
+use Timahfouz\SvgSanitizer\Services\SvgFileSanitizer;
+use Timahfouz\SvgSanitizer\Services\SvgCodeSanitizer;
 
 class SvgSanitizer
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace YourVendor\SvgSanitizer\Data;
+namespace Timahfouz\SvgSanitizer\Data;
 
 use enshrined\svgSanitize\data\AttributeInterface;
 

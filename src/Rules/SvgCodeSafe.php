@@ -1,10 +1,10 @@
 <?php
 
-namespace YourVendor\SvgSanitizer\Rules;
+namespace Timahfouz\SvgSanitizer\Rules;
 
 use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
-use YourVendor\SvgSanitizer\Services\SvgCodeSanitizer;
+use Timahfouz\SvgSanitizer\Services\SvgCodeSanitizer;
 
 /**
  * Validates that SVG code input (from textarea) is safe.

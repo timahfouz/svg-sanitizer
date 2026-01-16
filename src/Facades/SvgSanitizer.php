@@ -1,6 +1,6 @@
 <?php
 
-namespace YourVendor\SvgSanitizer\Facades;
+namespace Timahfouz\SvgSanitizer\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
@@ -9,10 +9,10 @@ use Illuminate\Support\Facades\Facade;
  * @method static string|null sanitizeCode(?string $svg)
  * @method static bool isFileSafe(\Illuminate\Http\UploadedFile $file)
  * @method static bool isCodeSafe(?string $svg)
- * @method static \YourVendor\SvgSanitizer\Services\SvgFileSanitizer file()
- * @method static \YourVendor\SvgSanitizer\Services\SvgCodeSanitizer code()
+ * @method static \Timahfouz\SvgSanitizer\Services\SvgFileSanitizer file()
+ * @method static \Timahfouz\SvgSanitizer\Services\SvgCodeSanitizer code()
  *
- * @see \YourVendor\SvgSanitizer\SvgSanitizer
+ * @see \Timahfouz\SvgSanitizer\SvgSanitizer
  */
 class SvgSanitizer extends Facade
 {

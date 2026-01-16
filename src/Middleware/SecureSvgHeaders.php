@@ -1,6 +1,6 @@
 <?php
 
-namespace YourVendor\SvgSanitizer\Middleware;
+namespace Timahfouz\SvgSanitizer\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
