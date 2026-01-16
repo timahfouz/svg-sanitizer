@@ -20,7 +20,7 @@ A comprehensive Laravel package for sanitizing SVG files and SVG code to prevent
 ### Step 1: Install via Composer
 
 ```bash
-composer require your-vendor/laravel-svg-sanitizer
+composer require timahfouz/svg-sanitizer
 ```
 
 ### Step 2: Publish Configuration (Optional)
@@ -30,6 +30,7 @@ php artisan vendor:publish --tag=svg-sanitizer-config
 ```
 
 This will create `config/svg-sanitizer.php` where you can customize:
+
 - Allowed SVG tags
 - Allowed SVG attributes
 - Dangerous patterns to detect
@@ -42,7 +43,7 @@ Add to `bootstrap/app.php` (Laravel 11):
 ```php
 ->withMiddleware(function (Middleware $middleware) {
     $middleware->alias([
-        'svg.headers' => \YourVendor\SvgSanitizer\Middleware\SecureSvgHeaders::class,
+        'svg.headers' => \Timahfouz\SvgSanitizer\Middleware\SecureSvgHeaders::class,
     ]);
 })
 ```
@@ -52,7 +53,7 @@ Or in `app/Http/Kernel.php` (Laravel 10):
 ```php
 protected $middlewareAliases = [
     // ...
-    'svg.headers' => \YourVendor\SvgSanitizer\Middleware\SecureSvgHeaders::class,
+    'svg.headers' => \Timahfouz\SvgSanitizer\Middleware\SecureSvgHeaders::class,
 ];
 ```
 
@@ -65,7 +66,7 @@ protected $middlewareAliases = [
 Use `svg_file_safe` rule or the `SvgFileSafe` class:
 
 ```php
-use YourVendor\SvgSanitizer\Rules\SvgFileSafe;
+use Timahfouz\SvgSanitizer\Rules\SvgFileSafe;
 
 // Using string rule
 $request->validate([
@@ -83,7 +84,7 @@ $request->validate([
 Use `svg_code_safe` rule or the `SvgCodeSafe` class:
 
 ```php
-use YourVendor\SvgSanitizer\Rules\SvgCodeSafe;
+use Timahfouz\SvgSanitizer\Rules\SvgCodeSafe;
 
 // Using string rule
 $request->validate([
@@ -101,7 +102,7 @@ $request->validate([
 #### Using the Facade
 
 ```php
-use YourVendor\SvgSanitizer\Facades\SvgSanitizer;
+use Timahfouz\SvgSanitizer\Facades\SvgSanitizer;
 
 // Sanitize an uploaded file
 $cleanSvg = SvgSanitizer::sanitizeFile($request->file('icon'));
@@ -123,8 +124,8 @@ if (SvgSanitizer::isCodeSafe($request->input('icon'))) {
 #### Using Dependency Injection
 
 ```php
-use YourVendor\SvgSanitizer\Services\SvgFileSanitizer;
-use YourVendor\SvgSanitizer\Services\SvgCodeSanitizer;
+use Timahfouz\SvgSanitizer\Services\SvgFileSanitizer;
+use Timahfouz\SvgSanitizer\Services\SvgCodeSanitizer;
 
 class MyController extends Controller
 {
@@ -138,18 +139,18 @@ class MyController extends Controller
         // Sanitize file upload
         if ($request->hasFile('icon')) {
             $cleanSvg = $this->fileSanitizer->sanitize($request->file('icon'));
-            
+  
             if ($cleanSvg === null) {
                 return back()->withErrors(['icon' => 'Invalid or unsafe SVG file.']);
             }
-            
+  
             // Store the sanitized SVG
             Storage::put('icons/icon.svg', $cleanSvg);
         }
 
         // Sanitize code input
         $iconCode = $this->codeSanitizer->sanitize($request->input('icon'));
-        
+  
         if ($iconCode === null && $request->filled('icon')) {
             return back()->withErrors(['icon' => 'Invalid or unsafe SVG code.']);
         }
@@ -173,9 +174,9 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use YourVendor\SvgSanitizer\Facades\SvgSanitizer;
-use YourVendor\SvgSanitizer\Rules\SvgCodeSafe;
-use YourVendor\SvgSanitizer\Rules\SvgFileSafe;
+use Timahfouz\SvgSanitizer\Facades\SvgSanitizer;
+use Timahfouz\SvgSanitizer\Rules\SvgCodeSafe;
+use Timahfouz\SvgSanitizer\Rules\SvgFileSafe;
 
 class CategoryController extends Controller
 {
@@ -192,7 +193,7 @@ class CategoryController extends Controller
         // Sanitize before storing
         if (!empty($validated['icon'])) {
             $validated['icon'] = SvgSanitizer::sanitizeCode($validated['icon']);
-            
+  
             if ($validated['icon'] === null) {
                 return back()
                     ->withErrors(['icon' => 'The icon contains unsafe content.'])
@@ -220,17 +221,17 @@ class CategoryController extends Controller
 
         if ($request->hasFile('icon')) {
             $file = $request->file('icon');
-            
+  
             if (strtolower($file->getClientOriginalExtension()) === 'svg') {
                 // Sanitize SVG file
                 $cleanSvg = SvgSanitizer::sanitizeFile($file);
-                
+  
                 if ($cleanSvg === null) {
                     return back()
                         ->withErrors(['icon' => 'The SVG file contains unsafe content.'])
                         ->withInput();
                 }
-                
+  
                 // Store sanitized content
                 $filename = uniqid() . '.svg';
                 Storage::disk('public')->put("icons/{$filename}", $cleanSvg);
@@ -266,15 +267,15 @@ Route::get('/storage/{path}', function ($path) {
 
 The sanitizer blocks common XSS attack vectors including:
 
-| Attack Vector | Example |
-|---------------|---------|
-| Script tags | `<script>alert(1)</script>` |
-| Event handlers | `<svg onload="alert(1)">` |
-| JavaScript URLs | `<a href="javascript:alert(1)">` |
-| Foreign objects | `<foreignObject><html>...</html></foreignObject>` |
-| External references | `<use xlink:href="http://evil.com/xss.svg">` |
-| Data URLs | `<a href="data:text/html,<script>alert(1)</script>">` |
-| CSS expressions | `style="behavior:url(...);"` |
+| Attack Vector       | Example                                                 |
+| ------------------- | ------------------------------------------------------- |
+| Script tags         | `<script>alert(1)</script>`                           |
+| Event handlers      | `<svg onload="alert(1)">`                             |
+| JavaScript URLs     | `<a href="javascript:alert(1)">`                      |
+| Foreign objects     | `<foreignObject><html>...</html></foreignObject>`     |
+| External references | `<use xlink:href="http://evil.com/xss.svg">`          |
+| Data URLs           | `<a href="data:text/html,<script>alert(1)</script>">` |
+| CSS expressions     | `style="behavior:url(...);"`                          |
 
 ## Configuration
 
@@ -345,7 +346,7 @@ composer test
 
 ## Security
 
-If you discover any security-related issues, please email your-email@example.com instead of using the issue tracker.
+If you discover any security-related issues, please email tarek.mahfouz2011@gmail.com instead of using the issue tracker.
 
 ## License
 
